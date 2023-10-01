@@ -1,4 +1,4 @@
-body{
+body {
     background-color: black;
     color: white;
 }
@@ -9,7 +9,17 @@ nav {
     align-items: center;
 }
 
-nav a {
+nav h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+nav h1 a:hover {
+    text-decoration: underline 1px;
+    color: blue;
+}
+
+nav ul li a {
     text-decoration: none;
     color: white;
 }
@@ -23,7 +33,7 @@ ul li {
     padding: 0 10px;
 }
 
-table{
+table {
     border: solid blue;
 }
 

@@ -71,7 +71,7 @@ deleteAll.addEventListener("click", () => {
     update();
 });
 
-function deleteTask(index){
+function deleteTask(index) {
     tasks.splice(index, 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     update();
