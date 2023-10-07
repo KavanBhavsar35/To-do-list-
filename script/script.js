@@ -48,6 +48,8 @@ add.addEventListener("click", () => {
                 input.innerHTML = "";
                 return;
             }
+            input.innerHTML = ``;
+            return;
         }
         let newTask = {
             taskTitle: title,
@@ -64,6 +66,10 @@ add.addEventListener("click", () => {
 });
 
 deleteAll.addEventListener("click", () => {
+    if(tasks.length == 0){
+        alert("No tasks exists!");
+        return;
+    }
     if (confirm("Are you sure to delete all tasks?")) {
         localStorage.clear();
         tasks = [];
