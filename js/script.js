@@ -9,13 +9,13 @@ const tasksJSON = localStorage.getItem("tasks");
 let tasks = tasksJSON ? JSON.parse(tasksJSON) : [];
 
 function update() {
-    if (tasks.length == 0) {
-        tableBody.innerHTML = `No task found!`;
-        return;
-    }
-    tableBody.innerHTML = ``;
-    for (let i = 0; i < tasks.length; i++) {
-        tableBody.innerHTML += `
+  if (tasks.length == 0) {
+    tableBody.innerHTML = `No task found!`;
+    return;
+  }
+  tableBody.innerHTML = ``;
+  for (let i = 0; i < tasks.length; i++) {
+    tableBody.innerHTML += `
         <tr>
             <th>${i + 1}</th>
             <td>${tasks[i]["taskTitle"]}</td>
@@ -23,91 +23,102 @@ function update() {
             <td><button class="btn" onclick="deleteTask(${i});">Delete</button></td>
         </tr>
         `;
-    }
+  }
 }
 
 update();
 
 add.addEventListener("click", () => {
-    input.innerHTML = `<br><label for="title">Title</label>
+  input.innerHTML = `<br><label for="title">Title</label>
     <input type="text" name="title" id="title"><br> 
     <label for="desc">Description</label>
     <input type="text" name="desc" id="desc"><br>
     <button class="btn" id="addNewTask">Submit</button>
     <button class="btn" id="cancel">Cancel</button>`;
-    addNewTask.addEventListener("click", () => {
-        const title = document.getElementById("title").value;
-        const desc = document.getElementById("desc").value;
-        if (!title) {
-            alert("Cannot add empty title!");
-            input.innerHTML = "";
-            return;
-        }
-        if (!desc) {
-            if (confirm("Add new task without adding description")) {
-                let newTask = {
-                    taskTitle: title,
-                    taskDesc: "-"
-                };
-                tasks.push(newTask);
-                localStorage.setItem("tasks", JSON.stringify(tasks));
-                update();
-                input.innerHTML = "";
-                return;
-            }
-            input.innerHTML = ``;
-            return;
-        }
+  addNewTask.addEventListener("click", () => {
+    const title = document.getElementById("title").value;
+    const desc = document.getElementById("desc").value;
+    if (!title) {
+      alert("Cannot add empty title!");
+      input.innerHTML = "";
+      return;
+    }
+    if (!desc) {
+      if (confirm("Add new task without adding description")) {
         let newTask = {
-            taskTitle: title,
-            taskDesc: desc
+          taskTitle: title,
+          taskDesc: "-"
         };
         tasks.push(newTask);
         localStorage.setItem("tasks", JSON.stringify(tasks));
         update();
         input.innerHTML = "";
-    });
-    cancel.addEventListener("click", () => {
-        input.innerHTML = "";
-    });
+        return;
+      }
+      input.innerHTML = ``;
+      return;
+    }
+    let newTask = {
+      taskTitle: title,
+      taskDesc: desc
+    };
+    tasks.push(newTask);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    update();
+    input.innerHTML = "";
+  });
+  cancel.addEventListener("click", () => {
+    input.innerHTML = "";
+  });
 });
 
 deleteAll.addEventListener("click", () => {
-    if(tasks.length == 0){
-        alert("No tasks exists!");
-        return;
-    }
-    if (confirm("Are you sure to delete all tasks?")) {
-        localStorage.clear();
-        tasks = [];
-    }
-    update();
+  if (tasks.length == 0) {
+    alert("No tasks exists!");
+    return;
+  }
+  if (confirm("Are you sure to delete all tasks?")) {
+    localStorage.clear();
+    tasks = [];
+  }
+  update();
 });
 
 function deleteTask(index) {
-    tasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    update();
+  tasks.splice(index, 1);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  update();
 }
 
 $(document).ready(function () {
   $(".data-table").each(function (_, table) {
     $(table).DataTable();
   });
- // Initialize DataTable
-  
+  // Initialize DataTable
+  $("#example_length #example_filter").hide();
+ // Initially hide all pages
+ $("#example").hide();
+
+ // Show the default active page (Home)
+//  $("#home").show();
+
+ // Handle navigation clicks
+ $(".nav-link").click(function () {
+    console.log("created")
+    //  e.preventDefault();
+     var target = $(this).attr("href");
+
+     // Hide all pages
+     $(".page").hide();
+
+     // Remove "active" class from all links
+     $(".nav-link").removeClass("active");
+
+     // Add "active" class to the clicked link
+     $(this).addClass("active");
+
+     // Show the target page
+     $(target).show();
+ });
 });
 
-
-1
-
-var table = $('#example').DataTable();
- 
-new $.fn.dataTable.Buttons( table, {
-  buttons: [
-      'copy', 'excel', 'pdf'
-  ]
-} );
-
-table.buttons().container()
-  .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );

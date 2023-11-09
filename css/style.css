@@ -19,7 +19,25 @@
     color: white;
     border-radius: 2px 10px;
 }
-#example_length,
-#example_filter{
-    visibility: hidden;
+navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Adjust the z-index as needed */
 }
+
+
+/* Add this CSS to your stylesheet or in a <style> tag in your HTML */
+
+/* Home icon */
+
+        .icon-fill {
+            display: none;
+        }
+        .nav-link.active .icon-fill {
+            display: inline;
+        }
+        .nav-link.active .icon {
+            display: none;
+        }
