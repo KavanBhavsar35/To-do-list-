@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])) {
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
     <title>To Do List</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/download.png">
 </head>
 

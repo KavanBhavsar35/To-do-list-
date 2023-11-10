@@ -19,6 +19,11 @@ nav h1 a:hover {
     color: blue;
 }
 
+nav ul li {
+    text-decoration: none;
+    color: white;
+}
+
 nav ul li:hover {
     text-decoration: underline 1px;
     color: blue;
