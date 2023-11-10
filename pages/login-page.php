@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +25,13 @@
             
             <?php 
                 session_start(); 
-                if(!empty($_SESSION['message'])){
+                if(!empty($_SESSION['error_message'])){
                     echo "
                         <div class='errorMessage'>
-                            <h3> {$_SESSION['message']} </h1>
+                            <h3> {$_SESSION['error_message']} </h1>
                         </div>
                     ";
-                    $_SESSION['message'] = ''; 
+                    $_SESSION['error_message'] = ''; 
                 }
              ?>
             <h3 class="title-h3">Login</h3>

@@ -41,6 +41,6 @@ if ($_POST) {
         $conn->close();
         die("Query failed: " . mysqli_error($conn));
     }
-    header('Location: ../index0.php');
+    header('Location: ../index1.php');
 }
 ?>

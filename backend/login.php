@@ -13,7 +13,7 @@ if ($_POST) {
         $user = $result->fetch_all()[0];
         $_SESSION['user'] = $user;
         $conn->close();
-        header('Location: ../kavan/index.php');
+        header('Location: ../index1.php');
     } else {
         $_SESSION['error_message'] = "Invalid username or password!";
         header('Location: ../pages/login-page.php');

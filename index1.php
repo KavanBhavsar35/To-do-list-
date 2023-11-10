@@ -111,7 +111,7 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-person"></i> Profile</a></li>
-                    <li class="nav-item"><a href="../backend/logout.php" class="nav-link"><i class="bi bi-box-arrow-in-left"></i> Logout</a>
+                    <li class="nav-item"><a href="backend/logout.php" class="nav-link"><i class="bi bi-box-arrow-in-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -152,6 +152,13 @@
                             <tbody>
                                 <?php 
                                     $count = 0;
+                                    if (count($tasks) == 0) {
+                                        echo "
+                                            <tr class='odd'>
+                                                <td valign='top' colspan='4' class='dataTables_empty' id='noData'>No data available!</td>
+                                            </tr>
+                                        ";
+                                    }
                                     foreach ($tasks as $task) {
                                         $count++;
                                         if ($task[3] == "0") {
