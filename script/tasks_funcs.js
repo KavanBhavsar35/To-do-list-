@@ -11,3 +11,17 @@ function delete_all(){
         location.href = "backend/deleteall.php";
     }
 }
+
+function mark_done(task_id){
+    // UPDATE `admin` SET `task_done` = '0' WHERE `admin`.`task_id` = 11;
+    task_id = parseInt(task_id);
+    document.getElementById("taskDONEID").value = task_id;
+    document.querySelector("#markDone").submit();
+}
+
+function mark_not_done(task_id){
+    // UPDATE `admin` SET `task_done` = '0' WHERE `admin`.`task_id` = 11;
+    task_id = parseInt(task_id);
+    document.getElementById("taskNOTDONEID").value = task_id;
+    document.querySelector("#markNotDone").submit();
+}

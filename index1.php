@@ -11,6 +11,8 @@
         die("Query failed: " . mysqli_error($conn));
     }
     $tasks = $result->fetch_all();
+    // var_dump($tasks);
+    // die;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +58,6 @@
                 $(this).addClass("active");
                 $(target).show();
                 toggleIcons(target)
-
-
             });
 
         });
@@ -151,18 +151,49 @@
 
                             <tbody>
                                 <?php 
+                                    $count = 0;
                                     foreach ($tasks as $task) {
-                                        echo "
-                                            <tr>
-                                                <td>$task[0]</td>
-                                                <td>$task[1]</td>
-                                                <td>$task[2]</td>
+                                        $count++;
+                                        if ($task[3] == "0") {
+                                            echo "
+                                                <tr>
+                                                    <td>$count</td>
+                                                    <td>$task[1]</td>
+                                                    <td>$task[2]</td>
+                                                    <td>
+                                                        <div class='d-flex flex-row'>
+                                                            <button style='margin:0px 10px;' class='btn btn-success' onclick='mark_done($task[0])'>
+                                                                <div class='d-flex flex-row'>
+                                                                    <i class='bi bi-check-circle' style='padding-right: 5px;'></i>
+                                                                    Mark&nbsp;Done
+                                                                </div>
+                                                            </button>
+                                                            <button style='margin:0px 10px;' class='btn btn-primary'>
+                                                                <div class='d-flex flex-row'>
+                                                                    <i class='bi bi-pencil' style='padding-right: 5px;'></i> Edit
+                                                                </div>
+                                                            </button>
+                                                            <button style='margin:0px 10px;' class='btn btn-warning' onclick='delete_task($task[0]);'>
+                                                                <div class='d-flex flex-row'>
+                                                                    <i class='bi bi-trash' style='padding-right: 5px;'></i> Delete
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ";
+                                        } else {
+                                            echo "
+                                                <tr>
+                                                <td><s>$count</s></td>
+                                                <td><s>$task[1]</s></td>
+                                                <td><s>$task[2]</s></td>
                                                 <td>
                                                     <div class='d-flex flex-row'>
-                                                        <button style='margin:0px 10px;' class='btn btn-success'>
+                                                        <button style='margin:0px 10px;' class='btn btn-success' onclick='mark_not_done($task[0])'>
                                                             <div class='d-flex flex-row'>
                                                                 <i class='bi bi-check-circle' style='padding-right: 5px;'></i>
-                                                                Mark&nbsp;Done
+                                                                Mark&nbsp;as&nbsp;not&nbsp;done
                                                             </div>
                                                         </button>
                                                         <button style='margin:0px 10px;' class='btn btn-primary'>
@@ -178,7 +209,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        ";
+                                            ";
+                                        }
                                     }
                                 ?>
                             </tbody>
@@ -196,6 +228,16 @@
         <div style="display: none;">
             <form action="backend/deletetask.php" method="post" id="deleteTask">
                 <textarea name="taskID" id="taskID" cols="30" rows="10"></textarea>
+            </form>
+        </div>
+        <div style="display: none;">
+            <form action="backend/markdone.php" method="post" id="markDone">
+                <textarea name="taskDONEID" id="taskDONEID" cols="30" rows="10"></textarea>
+            </form>
+        </div>
+        <div style="display: none;">
+            <form action="backend/marknotdone.php" method="post" id="markNotDone">
+                <textarea name="taskNOTDONEID" id="taskNOTDONEID" cols="30" rows="10"></textarea>
             </form>
         </div>
     </main>

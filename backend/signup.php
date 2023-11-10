@@ -35,7 +35,7 @@ if ($_POST) {
         $_SESSION['user'] = $user;
         $_SESSION['first_login'] = true;
     }
-    $query = "CREATE TABLE $newusername ( task_id INT AUTO_INCREMENT PRIMARY KEY, task_title VARCHAR(255) NOT NULL, task_desc TEXT)";
+    $query = "CREATE TABLE $newusername ( task_id INT AUTO_INCREMENT PRIMARY KEY, task_title VARCHAR(255) NOT NULL, task_desc TEXT, task_done BOOLEAN NOT NULL)";
     $result = $conn->query($query);
     if (!$result) {
         $conn->close();
