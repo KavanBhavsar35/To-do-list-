@@ -1,18 +1,18 @@
 <?php
-    include('backend/database/connection.php');
-    session_start();
-    if (!isset($_SESSION['user'])) {
-        die("<h1>Please <a href='pages/login-page.php'>Login</a> first!</h1>");
-    }
-    $user = $_SESSION['user'];
-    $query = "SELECT * FROM $user[1]";
-    $result = $conn->query($query);
-    if (!$result) {
-        die("Query failed: " . mysqli_error($conn));
-    }
-    $tasks = $result->fetch_all();
-    // var_dump($tasks);
-    // die;
+include('backend/database/connection.php');
+session_start();
+if (!isset($_SESSION['user'])) {
+    die("<h1>Please <a href='pages/login-page.php'>Login</a> first!</h1>");
+}
+$user = $_SESSION['user'];
+$query = "SELECT * FROM $user[1]";
+$result = $conn->query($query);
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+$tasks = $result->fetch_all();
+// var_dump($tasks);
+// die;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,8 +110,9 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-person"></i> Profile</a></li>
-                    <li class="nav-item"><a href="backend/logout.php" class="nav-link"><i class="bi bi-box-arrow-in-left"></i> Logout</a>
+                    <li class="nav-item"><a href="#profile  " class="nav-link"><i class="bi bi-person"></i> Profile</a></li>
+                    <li class="nav-item"><a href="backend/logout.php" class="nav-link"><i
+                                class="bi bi-box-arrow-in-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -150,20 +151,20 @@
                             </thead>
 
                             <tbody>
-                                <?php 
-                                    $count = 0;
-                                    if (count($tasks) == 0) {
-                                        echo "
+                                <?php
+                                $count = 0;
+                                if (count($tasks) == 0) {
+                                    echo "
                                             <tr class='odd'>
                                                 <td valign='top' colspan='4' class='dataTables_empty' id='noData'>No data available!</td>
                                             </tr>
                                         ";
-                                    }
-                                    foreach ($tasks as $task) {
-                                        $count++;
-                                        if ($task[3] == "0") {
-                                            echo "
-                                                <tr>
+                                }
+                                foreach ($tasks as $task) {
+                                    $count++;
+                                    if ($task[3] == "0") {
+                                        echo "
+                                                <tr>    
                                                     <td>$count</td>
                                                     <td>$task[1]</td>
                                                     <td>$task[2]</td>
@@ -189,8 +190,8 @@
                                                     </td>
                                                 </tr>
                                             ";
-                                        } else {
-                                            echo "
+                                    } else {
+                                        echo "
                                                 <tr>
                                                 <td><s>$count</s></td>
                                                 <td><s>$task[1]</s></td>
@@ -217,8 +218,8 @@
                                                 </td>
                                             </tr>
                                             ";
-                                        }
                                     }
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -247,8 +248,32 @@
                 <textarea name="taskNOTDONEID" id="taskNOTDONEID" cols="30" rows="10"></textarea>
             </form>
         </div>
+        <div id="profile" class="page container-fluid">
+            <div class="row" style="margin-top: 100px;">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card mt-5 fs-4">
+                        <div class="card-header">
+                            My Profile
+                        </div>
+                        <div class="card-body py-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Username:</strong>
+                                    <?= $user[1] ?>
+                                </li>
+                                <li class="list-group-item"><strong>Email:</strong>
+                                    <?= $user[2] ?>
+                                </li>
+                                <li class="list-group-item"><strong>Created At:</strong>
+                                    <?= $user[4] ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    
+
     <script src="script/tasks_funcs.js"></script>
 </body>
 
