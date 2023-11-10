@@ -131,7 +131,7 @@
                                 <button class="btn bg-dark text-white mb-2">
                                     <span><i class="bi bi-plus"></i></span> Add
                                 </button>
-                                <button class="btn bg-danger text-white">
+                                <button class="btn bg-danger text-white" onclick="delete_all();">
                                     <span><i class="bi bi-trash"></i></span> Delete All
                                 </button>
                             </div>
