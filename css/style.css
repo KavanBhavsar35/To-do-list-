@@ -1,48 +1,48 @@
-body {
-    background-color: black;
+@media (max-width:992px) {
+    /* #navvii{
+        margin-left: 30px;
+        color: blue;
+    } */
+    ul.navbar-nav.me-auto li.nav-item,
+    ul.navbar-nav.ms-auto li.nav-item{
+        margin-left: 30px;
+    }
+    .navbar-toggler{
+        border:none;
+    }
+}
+.navbar-toggler{
+    border:none;
+}
+.active{
+    background-color: grey;
     color: white;
+    border-radius: 2px 10px;
+}
+navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Adjust the z-index as needed */
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-nav h1 a {
-    text-decoration: none;
-    color: white;
-}
+/* Add this CSS to your stylesheet or in a <style> tag in your HTML */
 
-nav h1 a:hover {
+/* Home icon */
+
+        .icon-fill {
+            display: none;
+        }
+        .nav-link.active .icon-fill {
+            display: inline;
+        }
+        .nav-link.active .icon {
+            display: none;
+        }
+
+#source_code:hover{
     text-decoration: underline 1px;
     color: blue;
-}
-
-nav ul li {
-    text-decoration: none;
-    color: white;
-}
-
-nav ul li:hover {
-    text-decoration: underline 1px;
-    color: blue;
-}
-
-ul {
-    display: flex;
-}
-
-ul li {
-    list-style: none;
-    padding: 0 10px;
-}
-
-table {
-    border: solid blue;
-}
-
-.btn {
-    background-color: blue;
-    border-radius: 6px;
 }
