@@ -130,7 +130,7 @@
                         <div class="col-2">
                             <div class="d-flex flex-column align-items-stretch">
                                 <button class="btn bg-dark text-white mb-2">
-                                    <span><i class="bi bi-plus"></i></span> <a href="pages/addnewtask.php">Add</a>
+                                    <span><i class="bi bi-plus"></i></span> <a style="text-decoration: none; color: white;" href="pages/addnewtask.php">Add</a>
                                 </button>
                                 <button class="btn bg-danger text-white" onclick="delete_all();">
                                     <span><i class="bi bi-trash"></i></span> Delete All
