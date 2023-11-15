@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>login</title>
     <!-- fontawesome -->
@@ -11,6 +12,7 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="../css/style-login.css">
 </head>
+
 <body>
     <div class="container">
         <h1 class="title-h1">Login</h1>
@@ -22,22 +24,23 @@
                 <i class="fas fa-lock"></i>
                 <input class="password" type="password" name="password" placeholder="Enter your password" />
             </div>
-            
-            <?php 
-                session_start(); 
-                if(!empty($_SESSION['error_message'])){
-                    echo "
+
+            <?php
+            session_start();
+            if (!empty($_SESSION['error_message'])) {
+                echo "
                         <div class='errorMessage'>
                             <h3> {$_SESSION['error_message']} </h1>
                         </div>
                     ";
-                    $_SESSION['error_message'] = ''; 
-                }
-             ?>
+                $_SESSION['error_message'] = '';
+            }
+            ?>
             <h3 class="title-h3">Login</h3>
             <button class="btn" type="submit"><i class="fas fa-arrow-right"></i></button>
         </form>
         <h5 class="title-h5">Login or <a href="signup-page.php">Sign up</a></h5>
     </div>
 </body>
+
 </html>

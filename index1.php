@@ -1,25 +1,25 @@
 <?php
-    include('backend/database/connection.php');
-    session_start();
-    if (!isset($_SESSION['user'])) {
-        die("<h1>Please <a href='pages/login-page.php'>Login</a> first!</h1>");
+include('backend/database/connection.php');
+session_start();
+if (!isset($_SESSION['user'])) {
+    die("<h1>Please <a href='pages/login-page.php'>Login</a> first!</h1>");
+}
+$user = $_SESSION['user'];
+$query = "SELECT * FROM $user[1]";
+$result = $conn->query($query);
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+$tasks = $result->fetch_all();
+if (isset($_SESSION['new_task'])) {
+    if ($_SESSION['new_task'] == true) {
+        echo "<script>alert('Task added successfully!')</script>";
+        $_SESSION['new_task'] = false;
     }
-    $user = $_SESSION['user'];
-    $query = "SELECT * FROM $user[1]";
-    $result = $conn->query($query);
-    if (!$result) {
-        die("Query failed: " . mysqli_error($conn));
-    }
-    $tasks = $result->fetch_all();
-    if(isset($_SESSION['new_task'])){
-        if($_SESSION['new_task'] == true){
-            echo "<script>alert('Task added successfully!')</script>";
-            $_SESSION['new_task'] = false;  
-        }    
-    }
+}
 ?>
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -29,12 +29,15 @@
     <meta http-equiv='pragma' content='no-cache'>
     <title>To Do List</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> -->
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
     <link rel="icon" href="img/download.png">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="script/jquery.dataTables.min.js"></script>
     <script src="script/script.js"></script>
@@ -111,8 +114,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a href="#profile" class="nav-link"><i class="bi bi-person"></i> <?= $user[1] ?> </a></li>
-                    <li class="nav-item"><a href="backend/logout.php" class="nav-link"><i class="bi bi-box-arrow-in-left"></i> Logout</a>
+                    <li class="nav-item"><a href="#profile" class="nav-link"><i class="bi bi-person"></i>
+                            <?= $user[1] ?>
+                        </a></li>
+                    <li class="nav-item"><a href="backend/logout.php" class="nav-link"><i
+                                class="bi bi-box-arrow-in-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -130,7 +136,8 @@
                         <div class="col-2">
                             <div class="d-flex flex-column align-items-stretch">
                                 <button class="btn bg-dark text-white mb-2">
-                                    <span><i class="bi bi-plus"></i></span> <a style="text-decoration: none; color: white;" href="pages/addnewtask.php">Add</a>
+                                    <span><i class="bi bi-plus"></i></span> <a
+                                        style="text-decoration: none; color: white;" href="pages/addnewtask.php">Add</a>
                                 </button>
                                 <button class="btn bg-danger text-white" onclick="delete_all();">
                                     <span><i class="bi bi-trash"></i></span> Delete All
@@ -151,29 +158,29 @@
                             </thead>
 
                             <tbody>
-                                <?php 
-                                    $count = 0;
-                                    if (count($tasks) == 0) {
-                                        echo "
+                                <?php
+                                $count = 0;
+                                if (count($tasks) == 0) {
+                                    echo "
                                             <tr class='odd'>
                                                 <td valign='top' colspan='4' class='dataTables_empty' id='noData'>No data available!</td>
                                             </tr>
                                         ";
-                                    }
-                                    foreach ($tasks as $task) {
-                                        $count++;
-                                        if ($task[3] == "0") {
-                                            echo "
+                                }
+                                foreach ($tasks as $task) {
+                                    $count++;
+                                    if ($task[3] == "0") {
+                                        echo "
                                                 <tr>    
                                                     <td>$count</td>
                                                     <td>$task[1]</td>
                                                     <td>$task[2]</td>
                                                     <td>
                                                         <div class='d-flex flex-row'>
-                                                            <button style='margin:0px 10px;' class='btn btn-success' onclick='mark_done($task[0])'>
+                                                            <button style='margin:0px 10px;' class='btn btn-success' onclick='mark_done($task[0]);'>
                                                                 <div class='d-flex flex-row'>
                                                                     <i class='bi bi-check-circle' style='padding-right: 5px;'></i>
-                                                                    Mark&nbsp;Done
+                                                                    Mark&nbsp;done
                                                                 </div>
                                                             </button>
                                                             <button style='margin:0px 10px;' class='btn btn-primary'>
@@ -190,23 +197,18 @@
                                                     </td>
                                                 </tr>
                                             ";
-                                        } else {
-                                            echo "
+                                    } else {
+                                        echo "
                                                 <tr>
                                                 <td><s>$count</s></td>
                                                 <td><s>$task[1]</s></td>
                                                 <td><s>$task[2]</s></td>
                                                 <td>
                                                     <div class='d-flex flex-row'>
-                                                        <button style='margin:0px 10px;' class='btn btn-success' onclick='mark_not_done($task[0])'>
+                                                        <button style='margin:0px 10px;' class='btn btn-success' onclick='mark_not_done($task[0]);'>
                                                             <div class='d-flex flex-row'>
                                                                 <i class='bi bi-check-circle' style='padding-right: 5px;'></i>
                                                                 Mark&nbsp;as&nbsp;not&nbsp;done
-                                                            </div>
-                                                        </button>
-                                                        <button style='margin:0px 10px;' class='btn btn-primary'>
-                                                            <div class='d-flex flex-row'>
-                                                                <i class='bi bi-pencil' style='padding-right: 5px;'></i> Edit
                                                             </div>
                                                         </button>
                                                         <button style='margin:0px 10px;' class='btn btn-warning' onclick='delete_task($task[0]);'>
@@ -218,8 +220,8 @@
                                                 </td>
                                             </tr>
                                             ";
-                                        }
                                     }
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -249,31 +251,31 @@
             </form>
         </div>
         <div id="profile" class="page container-fluid">
-      <div class="row" style="margin-top: 100px;">
-        <div class="col-md-6 offset-md-3">
-          <div class="card mt-5 fs-4">
-            <div class="card-header">
-              My Profile
+            <div class="row" style="margin-top: 100px;">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card mt-5 fs-4">
+                        <div class="card-header">
+                            My Profile
+                        </div>
+                        <div class="card-body py-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Username:</strong>
+                                    <?= $user[1] ?>
+                                </li>
+                                <li class="list-group-item"><strong>Email:</strong>
+                                    <?= $user[2] ?>
+                                </li>
+                                <li class="list-group-item"><strong>Created At:</strong>
+                                    <?= $user[4] ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body py-3">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Username:</strong>
-                  <?= $user[1] ?>
-                </li>
-                <li class="list-group-item"><strong>Email:</strong>
-                  <?= $user[2] ?>
-                </li>
-                <li class="list-group-item"><strong>Created At:</strong>
-                  <?= $user[4] ?>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
     </main>
-    
+
     <script src="script/tasks_funcs.js"></script>
 </body>
 

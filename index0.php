@@ -79,7 +79,7 @@ if (isset($_SESSION['user'])) {
     ?>
     <?php
     if (isset($_SESSION['first_login'])) {
-        if($_SESSION['first_login']){
+        if ($_SESSION['first_login']) {
             echo "
                     <script>alert('You have been successfully registered!');</script>
                 ";
