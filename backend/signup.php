@@ -2,9 +2,9 @@
 session_start();
 if ($_POST) {
     include('database/connection.php');
-    $newusername = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $newusername = $_POST['user_Name'];
+    $email = $_POST['user_Email'];
+    $password = $_POST['user_Password'];
     $query = "SELECT * FROM users WHERE user_name = '$newusername'";
     $result = $conn->query($query);
     if (!$result) {
@@ -14,7 +14,8 @@ if ($_POST) {
     if ($result->num_rows > 0) {
         $_SESSION['same_name'] = true;
         $conn->close();
-        header('Location: ../pages/signup-page.php');
+        header('Location: ../to_do_list-kavan/index.php');
+        // header('Location: ../pages/signup-page.php');
     }
     date_default_timezone_set('Asia/Calcutta');
     $date = date('Y-m-d H:i:s');
@@ -41,6 +42,7 @@ if ($_POST) {
         $conn->close();
         die("Query failed: " . mysqli_error($conn));
     }
-    header('Location: ../index1.php');
+    header('Location: ../to_do_list-kavan/index.php');
+    // header('Location: ../index1.php');
 }
 ?>

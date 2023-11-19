@@ -13,7 +13,7 @@ function delete_all() {
         return;
     }
     if (confirm("Are you sure you want to delete all the tasks?")) {
-        location.href = "backend/deleteall.php";
+        location.href = "../backend/deleteall.php";
     }
 }
 

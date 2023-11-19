@@ -33,9 +33,9 @@ session_start();
         </form>
         <div style="display: none;">
             <form action="../backend/signup.php" method="post" id="registerForm">
-                <input id="userName" type="text" name="username" placeholder=" Enter your username" />
-                <input id="userEmail" type="email" name="email" placeholder="Enter your email" id="email" />
-                <input id="userPassword" type="password" name="password" placeholder="Create your password" />
+                <input id="user_Name" class="user_Name" type="text" name="user_Name" placeholder=" Enter your username" />
+                <input id="user_Email" class="user_Email" type="email" name="user_Email" placeholder="Enter your email" id="email" />
+                <input id="user_Password" class="user_Password" type="password" name="user_Password" placeholder="Create your password" />
             </form>
         </div>
         <?php
@@ -45,7 +45,7 @@ session_start();
                     <script>alert('This username is already taken choose another username.');</script>
                 ";
                 $_SESSION['same_name'] = false;
-            }
+            }   
         }
         ?>
         <h5 class="title-h5">singup or <a href="login-page.php">login</a></h5>

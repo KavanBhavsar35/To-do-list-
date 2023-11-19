@@ -159,20 +159,22 @@ if (isset($_SESSION['new_task'])) {
 
                             <tbody>
                                 <?php
-                                $count = 0;
+                                $counts = 0;
+                                $counts = count($tasks);
+                                die;
                                 if (count($tasks) == 0) {
                                     echo "
                                             <tr class='odd'>
-                                                <td valign='top' colspan='4' class='dataTables_empty' id='noData'>No data available!</td>
+                                                <td valign='top' colspan='4' class='dataTables_empty' id='noData'>All tasks done!</td>
                                             </tr>
                                         ";
                                 }
                                 foreach ($tasks as $task) {
-                                    $count++;
+                                    $counts++;
                                     if ($task[3] == "0") {
                                         echo "
                                                 <tr>    
-                                                    <td>$count</td>
+                                                    <td>$counts</td>
                                                     <td>$task[1]</td>
                                                     <td>$task[2]</td>
                                                     <td>
@@ -200,7 +202,7 @@ if (isset($_SESSION['new_task'])) {
                                     } else {
                                         echo "
                                                 <tr>
-                                                <td><s>$count</s></td>
+                                                <td><s>$counts</s></td>
                                                 <td><s>$task[1]</s></td>
                                                 <td><s>$task[2]</s></td>
                                                 <td>

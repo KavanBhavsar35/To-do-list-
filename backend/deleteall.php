@@ -7,5 +7,6 @@ $result = $conn->query($query);
 if (!$result) {
     die("Query failed: " . mysqli_error($conn));
 }
-header('Location: ../index1.php');
+header('Location: ../to_do_list-kavan/index.php');
+// header('Location: ../index1.php');
 ?>
