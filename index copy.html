@@ -152,25 +152,22 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            
             var editButtons = document.querySelectorAll('.edit');
+            // console.log(editButtons)
             editButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                     var taskRow = button.closest('.task');
                     var title = taskRow.querySelector('.title');
                     var desc = taskRow.querySelector('.desc');
                     var flexRow = button.querySelector('.d-flex .flex-row');
-
-                    if (button.classList.contains('your-class-name')) {
-                        if (flexRow.innerHTML == '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done') {
-                            flexRow.innerHTML = '<i class="bi bi-pencil" style="padding-right: 5px;"></i> Edit';
-                            title.contentEditable = false;
-                            desc.contentEditable = false;
-                        } else {
-                            flexRow.innerHTML = '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done';
-                            title.contentEditable = true;
-                            desc.contentEditable = true;
-                        }
+                    if (flexRow.innerHTML == '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done') {
+                        flexRow.innerHTML = '<i class="bi bi-pencil" style="padding-right: 5px;"></i> Edit';
+                        title.contentEditable = false;
+                        desc.contentEditable = false;
+                    } else {
+                        flexRow.innerHTML = '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done';
+                        title.contentEditable = true;
+                        desc.contentEditable = true;
                     }
                 });
             });
