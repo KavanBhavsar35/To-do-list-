@@ -105,35 +105,6 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var editButtons = document.querySelectorAll('.edit');
-            editButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var taskRow = button.closest('.task');
-                    var title = taskRow.querySelector('.title');
-                    var desc = taskRow.querySelector('.desc');
-                    var flexRow = button.querySelector('.d-flex .flex-row');
-                    // var button = taskRow.querySelector('.edit')
-
-                    if(button.classList.contains())
-                    if (flexRow.innerHTML == '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done') {
-                        flexRow.innerHTML = '<i class="bi bi-pencil" style="padding-right: 5px;"></i> Edit'
-                        title.contentEditable = false;
-                        desc.contentEditable = false;
-                    } else {
-                        flexRow.innerHTML = '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done'
-                        title.contentEditable = true;
-                        desc.contentEditable = true;
-                    }
-                });
-            });
-
-            var contentEditableFields = document.querySelectorAll('[contenteditable="true"]');
-            contentEditableFields.forEach(function (field) {
-                field.addEventListener('blur', function () {
-                    // You can add code here to handle saving changes if needed
-                });
-            });
-
             var completeButton = document.querySelectorAll('.completed');
             completeButton.forEach(function (button) {
                 button.addEventListener('click', function () {
@@ -163,22 +134,56 @@
         });
     </script>
     <script>
-       document.addEventListener('DOMContentLoaded',function() {
-        var navbarToggleButton = document.querySelector("#navbarToggleButton");
-        var icon = navbarToggleButton.querySelector('i');
-        console.log(icon)
-        navbarToggleButton.addEventListener('click',function() {
-            if(navbarToggleButton.classList.contains("collapsed")){
-                icon.classList.remove("bi-x");
-                icon.classList.add("bi-list");
-            } else {
-                icon.classList.remove("bi-list");
-                icon.classList.add("bi-x");
-            }
-            // var container = navbarToggleButton.closest(".container");
-            
+        document.addEventListener('DOMContentLoaded', function () {
+            var navbarToggleButton = document.querySelector("#navbarToggleButton");
+            var icon = navbarToggleButton.querySelector('i');
+            navbarToggleButton.addEventListener('click', function () {
+                if (navbarToggleButton.classList.contains("collapsed")) {
+                    icon.classList.remove("bi-x");
+                    icon.classList.add("bi-list");
+                } else {
+                    icon.classList.remove("bi-list");
+                    icon.classList.add("bi-x");
+                }
+                // var container = navbarToggleButton.closest(".container");
+
+            });
         });
-       });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            var editButtons = document.querySelectorAll('.edit');
+            editButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var taskRow = button.closest('.task');
+                    var title = taskRow.querySelector('.title');
+                    var desc = taskRow.querySelector('.desc');
+                    var flexRow = button.querySelector('.d-flex .flex-row');
+
+                    if (button.classList.contains('your-class-name')) {
+                        if (flexRow.innerHTML == '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done') {
+                            flexRow.innerHTML = '<i class="bi bi-pencil" style="padding-right: 5px;"></i> Edit';
+                            title.contentEditable = false;
+                            desc.contentEditable = false;
+                        } else {
+                            flexRow.innerHTML = '<i class="bi bi-check-all" style="padding-right: 5px;"></i> Done';
+                            title.contentEditable = true;
+                            desc.contentEditable = true;
+                        }
+                    }
+                });
+            });
+
+            var contentEditableFields = document.querySelectorAll('[contenteditable="true"]');
+            contentEditableFields.forEach(function (field) {
+                field.addEventListener('blur', function () {
+                    // You can add code here to handle saving changes if needed
+                });
+            });
+
+        });
+
     </script>
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.7/b-2.4.2/datatables.min.js"></script>
 
@@ -190,7 +195,8 @@
         <div class="container ">
             <a class="navbar-brand  navigationContent" href="https://github.com/JatinKevlani/to_do_list.git"><i
                     class="bi bi-card-checklist"></i> To Do List</a>
-            <button style="color: #DAD7CD;" class="border-0 fs-1 navbar-toggler shadow-none" id="navbarToggleButton" type="button" data-bs-toggle="collapse" data-bs-target="#content">
+            <button style="color: #DAD7CD;" class="border-0 fs-1 navbar-toggler shadow-none" id="navbarToggleButton"
+                type="button" data-bs-toggle="collapse" data-bs-target="#content">
                 <span><i class="bi bi-list"></i></span>
             </button>
             <div class="collapse navbar-collapse navbarContent" id="content">
@@ -212,11 +218,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a id="signupButton" class="nav-link loginNavLink  navigationContent"><i
-                                class="icon bi bi-person-plus"></i><i class="icon-fill bi bi-person-plus-fill"></i>
+                    <li class="nav-item"><a id="signupButton" class="nav-link loginNavLink  navigationContent"
+                            data-bs-toggle="modal" data-bs-target="#signup"><i class="icon bi bi-person-plus"></i><i
+                                class="icon-fill bi bi-person-plus-fill"></i>
                             Signup</a></li>
-                    <li class="nav-item"><a id="loginButton" class="nav-link loginNavLink  navigationContent"><i
-                                class="icon bi bi-lock"></i><i class="icon-fill bi bi-lock-fill"></i> Login</a>
+                    <li class="nav-item"><a id="loginButton" class="nav-link loginNavLink  navigationContent"
+                            data-bs-toggle="modal" data-bs-target="#login"><i class="icon bi bi-lock"></i><i
+                                class="icon-fill bi bi-lock-fill"></i> Login</a>
                     </li>
                 </ul>
             </div>
@@ -242,7 +250,8 @@
                                     <i class="bi bi-gear"></i> Actions
                                 </button>
                                 <div class="dropdownMenu dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <button class="dropdown-item btn bg-dark text-white">
+                                    <button class="dropdown-item btn bg-dark text-white" data-bs-toggle="modal"
+                                        data-bs-target="#inputModal">
                                         <i class="bi bi-plus"></i> Add
                                     </button>
                                     <button class="dropdown-item btn bg-danger text-white">
@@ -251,7 +260,8 @@
                                 </div>
                             </div>
                             <div class="d-none d-md-flex flex-md-column align-items-md-stretch ms-auto">
-                                <button class="px-4 btn bg-dark text-white mb-2">
+                                <button class="px-4 btn bg-dark text-white mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#inputModal">
                                     <span><i class="bi bi-plus"></i></span> Add
                                 </button>
                                 <button class="px-4 btn bg-danger text-white">
@@ -360,81 +370,225 @@
             <pre class="display-2">rersssssserer</pre>
         </div>
 
-        <div id="signupFormContainer" class="formContainer card-body slide-up d-none">
-            <!-- <div id="signupFormContainer" class="card-body"> -->
-            <div class="d-flex justify-content-end">
-                <button id="closeButtonSignup" class="btn border-0 p-0" style="font-size: 30px;">
-                    <span><i class="bi bi-x"></i></span>
-                </button>
+
+
+        <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="signupLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content loginSignupContent">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="signup.php" method="post" class="mx-auto">
+                            <div class="d-flex justify-content-center">
+                                <p class="display-3 pb-3"> Sign Up!</p>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="userName"
+                                    style="font-weight: bold;">Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="userName" name="userName" class="mx-md-2 form-control"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="email"
+                                    style="font-weight: bold;">Email:</label>
+                                <div class="col-md-9">
+                                    <input type="email" id="email" name="email" class="mx-md-2 form-control" required>
+                                </div>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="pswd"
+                                    style="font-weight: bold;">Password:</label>
+                                <div class="col-md-9">
+                                    <input type="password" id="pswd" name="pswd" class="mx-md-2 form-control" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <!-- Move the Signup button to the form and hide it -->
+                        <button type="button" onclick="signup()" class="btn loginSignupButton">Signup</button>
+                        <p class="fs-5 text-white ms-3"> or </p>
+
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#login" class="btn alternateButton">Login</a>
+                    </div>
+                </div>
             </div>
-            <form action="signup.php" method="post" class="mx-auto">
-                <div class="d-flex justify-content-center">
-                    <p class="display-3 pb-3"> Sign Up!</p>
-                </div>
-                <div class="py-2 form-group row">
-                    <label class="col-md-3 col-form-label" for="userName" style="font-weight: bold;">Name:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="userName" name="userName" class="mx-md-2 form-control" required>
-                    </div>
-                </div>
-                <div class="py-2 form-group row">
-                    <label class="col-md-3 col-form-label" for="email" style="font-weight: bold;">Email:</label>
-                    <div class="col-md-9">
-                        <input type="email" id="email" name="email" class="mx-md-2 form-control" required>
-                    </div>
-                </div>
-                <div class="py-2 form-group row">
-                    <label class="col-md-3 col-form-label" for="pswd" style="font-weight: bold;">Password:</label>
-                    <div class="col-md-9">
-                        <input type="password" id="pswd" name="pswd" class="mx-md-2 form-control" required>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-6 offset-md-4">
-                        <button onclick="signup()" class="btn loginSignupButton"
-                            style="margin-top: 15px;">Signup</button>
-                        <!-- <p> or </p> -->
-                        <!-- <button id="signupvButton"> Login</button> -->
-                    </div>
-                </div>
-            </form>
         </div>
 
-        <div id="loginFormContainer" class="formContainer card-body slide-up d-none">
-            <!-- <div id="signupFormContainer" class="card-body"> -->
-            <div class="d-flex justify-content-end">
-                <button id="closeButtonLogin" class="btn border-0 p-0" style="font-size: 30px;">
-                    <span><i class="bi bi-x"></i></span>
-                </button>
+        <script>
+            // Add JavaScript to submit the form when the Signup button is clicked
+            document.addEventListener('DOMContentLoaded', function () {
+                var signupButton = document.querySelector('#signup button.loginSignupButton');
+                if (signupButton) {
+                    signupButton.addEventListener('click', function () {
+                        // Submit the form when the Signup button is clicked
+                        var signupForm = document.querySelector('#signup form');
+                        if (signupForm) {
+                            signupForm.submit();
+                        }
+                    });
+                }
+            });
+        </script>
+
+        <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content loginSignupContent">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="login.php" method="post" class="mx-auto">
+                            <div class="d-flex justify-content-center">
+                                <p class="display-3 pb-3"> Login</p>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="userEmail"
+                                    style="font-weight: bold;">Email:</label>
+                                <div class="col-md-9">
+                                    <input type="email" id="userEmail" name="userEmail" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="userPswd"
+                                    style="font-weight: bold;">Password:</label>
+                                <div class="col-md-9">
+                                    <input type="password" id="userPswd" name="userPswd" class="form-control" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <!-- Move the Login button to the form and hide it -->
+                        <button type="button" onclick="login()" class="btn loginSignupButton">Login</button>
+                        <p class="fs-5 text-white ms-3"> or </p>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#signup"
+                            class="btn alternateButton">Signup</a>
+                    </div>
+                </div>
             </div>
-            <form action="login.php" method="post" class="mx-auto">
-                <div class="d-flex justify-content-center">
-                    <p class="display-3 pb-3"> Login</p>
-                </div>
-                <div class="py-2 form-group row">
-                    <label class="col-md-3 col-form-label" for="userEmail" style="font-weight: bold;">Email:</label>
-                    <div class="col-md-9">
-                        <input type="email" id="userEmail" name="userEmail" class="form-control" required>
+        </div>
+
+        <script>
+            // Add JavaScript to submit the form when the Login button is clicked
+            document.addEventListener('DOMContentLoaded', function () {
+                var loginButton = document.querySelector('#login button.loginSignupButton');
+
+                if (loginButton) {
+                    loginButton.addEventListener('click', function () {
+                        // Submit the form when the Login button is clicked
+                        var loginForm = document.querySelector('#login form');
+                        if (loginForm) {
+                            loginForm.submit();
+                        }
+                    });
+                }
+            });
+        </script>
+        <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="inputModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content addTaskContent">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="addTask.php" method="post" class="mx-auto">
+                            <div class="d-flex justify-content-center">
+                                <p class="display-3 pb-3"> Add task</p>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="title"
+                                    style="font-weight: bold;">Title:</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="title" name="title" class="form-control">
+                                </div>
+                            </div>
+                            <div class="py-2 form-group row">
+                                <label class="col-md-3 col-form-label" for="description"
+                                    style="font-weight: bold;">Description:</label>
+                                <div class="col-md-9">
+                                    <textarea style="min-height: 40px;resize: vertical;" id="description"
+                                        name="description" rows="2" class="taskDescription form-control"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-top-0 mt-2">
+                        <!-- Move the Login button to the form and hide it -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" onclick="addTask()" class="btn btn-dark">Add Task</button>
                     </div>
                 </div>
-                <div class="py-2 form-group row">
-                    <label class="col-md-3 col-form-label" for="userPswd" style="font-weight: bold;">Password:</label>
-                    <div class="col-md-9">
-                        <input type="password" id="userPswd" name="userPswd" class="form-control" required>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-6 offset-md-4">
-                        <button onclick="login()" class="btn loginSignupButton" style="margin-top: 15px;">Login</button>
-                        <!-- <p> or </p> -->
-                        <!-- <button id="signupButton"> Signup</button> -->
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </main>
 </body>
 <style>
+    .loginSignupContent {
+        padding: 20px;
+        background-color: rgba(52, 78, 65, 0.455);
+        backdrop-filter: blur(6px);
+        color: black;
+        border: 2px solid rgba(255, 255, 255, 0.49);
+        border-radius: 25px;
+    }
+
+    .addTaskContent {
+        padding: 20px;
+        border: 2px solid rgba(52, 78, 65, 0.455);
+        background-color: rgba(255, 255, 255, 0.49);
+        border-radius: 10px;
+        backdrop-filter: blur(6px);
+
+    }
+
+    /* Style for the textarea */
+    .taskDescription {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        line-height: 1.4;
+        border: 1px solid #ccc;
+        resize: none;
+        /* Disable resizing */
+        overflow-y: auto;
+        /* Enable vertical scrollbar when needed */
+        height: 80px;
+        /* Set a fixed height for the textarea */
+        max-height: 100px;
+    }
+
+    /* Customize the scrollbar */
+    .taskDescription::-webkit-scrollbar {
+        width: 10px;
+        /* Set the width of the scrollbar */
+    }
+
+    .taskDescription::-webkit-scrollbar-thumb {
+        background-color: #888;
+        /* Set the color of the scrollbar thumb */
+        border-radius: 10px;
+        /* Adjust the value for the rounded corners */
+    }
+
+    .taskDescription::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        /* Set the color of the scrollbar track */
+        /* border-bottom-left-radius: 60px; */
+    }
+
+    .taskDescription::-webkit-scrollbar-track-piece {
+        background-color: #DAD7CD;
+    }
+
+    .taskDescription::-webkit-scrollbar-corner {
+        background-color: #DAD7CD;
+    }
+
     .loginSignupButton {
         background-color: rgba(88, 129, 87);
         color: black;
@@ -476,7 +630,8 @@
     body {
         background-color: #DAD7CD;
     }
-    .buttonDropdown{
+
+    .buttonDropdown {
         background-color: #588157;
         color: #DAD7CD;
     }
@@ -485,7 +640,7 @@
         border: none;
         background-color: rgba(81, 130, 100, 0.777);
         width: 100px;
-        padding: 2px  !important;
+        padding: 2px !important;
         border-radius: 5px;
     }
 
@@ -551,20 +706,23 @@
         }
 
     }
+
     .active {
-        background-color: #DAD7CD ;
+        background-color: #DAD7CD;
         color: #588157;
         border-radius: 5px 5px 0 0;
-    
+
     }
+
     @media only screen and (max-width: 992px) {
-        .active{
-            background-color: #DAD7CD ;
-            color: #588157 ;
-            border-radius: 5px ;
+        .active {
+            background-color: #DAD7CD;
+            color: #588157;
+            border-radius: 5px;
             padding-left: 12px;
         }
     }
+
     @media only screen and (min-width:1px)and (max-width: 575px) {
         .formContainer {
             padding: 20px;
@@ -589,8 +747,6 @@
     .nav-link {
         transition: color 0.3s ease-out;
     }
-
-    
 </style>
 
 </html>
