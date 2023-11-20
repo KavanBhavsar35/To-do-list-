@@ -3,7 +3,11 @@ submitBtn.addEventListener("click", async (e) => {
     let username = document.getElementById("reg_userName").value;
     let email = document.getElementById("reg_email").value;
     let password = document.getElementById("reg_pswd").value;
-    resultCont.innerHTML = `<img width="123" src="../img/loading.svg" alt="loading svg">`
+    resultCont.innerHTML = `<div class="d-flex justify-content-center">
+                                <div class=" spinner-border text-secondary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>`
     let key = "ema_live_gJVxfFpD3BE2H6E7TKWflkqtJNIStW6OmJYo8W8t";
     let url = `https://api.emailvalidation.io/v1/info?apikey=${key}&email=${email}`;
     let res = await fetch(url);

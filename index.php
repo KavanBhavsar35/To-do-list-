@@ -95,6 +95,18 @@ if (isset($_SESSION['same_name'])) {
                 // var container = navbarToggleButton.closest(".container");
 
             });
+
+
+            document.querySelectorAll('.pageLink').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    var navbar = link.closest(".navbar-collapse");
+                    navbar.classList.remove("show")
+                    navbarToggleButton.classList.add("collapsed");
+                    navbarToggleButton.ariaExpanded=false;
+                    icon.classList.remove("bi-x");
+                    icon.classList.add("bi-list");
+                });
+            });
         });
     </script>
     <!-- Script for editing tasks -->
@@ -145,7 +157,7 @@ if (isset($_SESSION['same_name'])) {
                 type="button" data-bs-toggle="collapse" data-bs-target="#content">
                 <span><i class="bi bi-list"></i></span>
             </button>
-            <div class="collapse navbar-collapse navbarContent" id="content">
+            <div class="collapse navbar-collapse navbarContent navbarTrans" id="content">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link  pageLink active navigationContent" href="#home"><i
@@ -153,29 +165,40 @@ if (isset($_SESSION['same_name'])) {
                             Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  pageLink navigationContent" href="#about"><i
-                                class="icon bi bi-info-circle"></i><i class="icon-fill bi bi-info-circle-fill"></i>
-                            About</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link  pageLink navigationContent" href="#contact"><i
                                 class="icon bi bi-envelope"></i><i class="icon-fill bi bi-envelope-fill"></i>
                             Contact</a>
                     </li>
+                    
                 </ul>
                 <?php
                 if (!isset($_SESSION['user'])) {
                     echo "
                         <ul class='navbar-nav ms-auto'>
-                            <li class='nav-item'><a id='signupButton' class='nav-link loginNavLink  navigationContent' data-bs-toggle='modal' data-bs-target='#signup'><i class='icon bi bi-person-plus'></i><i class='icon-fill bi bi-person-plus-fill'></i> Signup</a></li>
-                            <li class='nav-item'><a id='loginButton' class='nav-link loginNavLink  navigationContent' data-bs-toggle='modal' data-bs-target='#login'><i class='icon bi bi-lock'></i><i class='icon-fill bi bi-lock-fill'></i> Login</a></li>
+                            <li class='nav-item'><a id='signupButton' style='hover:pointer' class='nav-link loginNavLink  navigationContent' data-bs-toggle='modal' data-bs-target='#signup'><i class='icon bi bi-person-plus'></i><i class='icon-fill bi bi-person-plus-fill'></i> Signup</a></li>
+                            <li class='nav-item'><a id='loginButton' style='hover:pointer' class='nav-link loginNavLink  navigationContent' data-bs-toggle='modal' data-bs-target='#login'><i class='icon bi bi-lock'></i><i class='icon-fill bi bi-lock-fill'></i> Login</a></li>
                         </ul>
                     ";
                 } else {
                     echo "
                         <ul class='navbar-nav ms-auto'>
-                            <li class='nav-item'><a id='signupButton' class='nav-link loginNavLink  navigationContent' href='#'><i class='bi bi-person'></i><i class='icon-fill bi bi-person-fill'></i>  $user[1]</a></li>
-                            <li class='nav-item'><a id='loginButton' class='nav-link loginNavLink  navigationContent' href='backend/logout.php'><i class='bi bi-box-arrow-in-left'></i><i class='icon-fill bi bi-lock-fill'></i> Logout</a></li>
+                        <li class='nav-item'>
+                        <div class='btn-group'>
+                            <a id='signupButton' class='nav-link loginNavLink  navigationContent' href='#'><i class='icon bi bi-person'></i><i class='icon-fill bi bi-person'></i> Hello  $user[1] !</a>
+                            <button type='button' style='border:none' class='btn navigatinContent text-white dropdown-toggle dropdown-toggle-split' data-bs-toggle='dropdown'
+                                aria-expanded='false'>
+                                <span class='visually-hidden'>Toggle Dropdown</span>
+                            </button>
+                            <ul class='dropdown-menu'>
+                                <li><a class=' ps-2 nav-link  pageLink' href='#profile'><i
+                                class='icon bi bi-person-circle'></i><i class='icon-fill bi bi-person-circle'></i>
+                            My Profile</a></li>
+                                <li>
+                                <a id='ps-2 loginButton' class='nav-link  ' href='backend/logout.php'><i class='bi bi-box-arrow-in-right'></i><i class='icon-fill bi bi-arrow-in-right'></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                         </ul>
                     ";
                 }
@@ -254,9 +277,9 @@ if (isset($_SESSION['same_name'])) {
                                                     <td contenteditable='false' class='desc'><s>$task[2]</s></td>
                                                     <td>
                                                         <div class='buttonRow d-flex flex-lg-row justify-content-around flex-md-column align-content-md-stretch py-1 flex-sm-column '>
-                                                            <button class='mx-1 btn btn-success completed' onclick='mark_not_done($task[0]);'>
+                                                            <button class='mx-1 btn btn-danger completed' onclick='mark_not_done($task[0]);'>
                                                                 <div class='d-flex flex-row'>
-                                                                    <i class='bi bi-check-circle' style='padding-right: 5px;'></i> Mark&nbsp;not&nbsp;done
+                                                                    <i class='bi bi-check-circle' style='padding-right: 5px;'></i> Mark&nbsp;Pending
                                                                 </div>
                                                             </button>
                                                             <button class='mx-1 btn btn-warning delete' onclick='delete_task($task[0]);'>
@@ -321,7 +344,7 @@ if (isset($_SESSION['same_name'])) {
                 </div>
             </div>
         </div>
-        <div id="about" class="row page" style="margin-top: 40px;">
+        <div id="profile" class="row page" style="margin-top: 40px;">
             <pre class="display-2">rersssssserer</pre>
         </div>
         <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="signupLabel" aria-hidden="true">
@@ -478,8 +501,14 @@ if (isset($_SESSION['same_name'])) {
     </main>
     <script src="js/evalidate.js"></script>
     <script src="js/tasks_funcs.js"></script>
+    <script>
+    // Collapse the navbar when a link is clicked
+    
+  </script>
 </body>
 <style>
+
+
     .loginSignupContent {
         padding: 20px;
         background-color: rgba(52, 78, 65, 0.455);
@@ -658,7 +687,6 @@ if (isset($_SESSION['same_name'])) {
         }
 
     }
-
     .active {
         background-color: #DAD7CD;
         color: #588157;
@@ -700,5 +728,4 @@ if (isset($_SESSION['same_name'])) {
         transition: color 0.3s ease-out;
     }
 </style>
-
 </html>
