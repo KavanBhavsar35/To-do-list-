@@ -7,13 +7,8 @@ function delete_task(task_id) {
 }
 
 function delete_all() {
-    var element = document.getElementById("noData");
-    if (element !== null) {
-        alert("No tasks found to delete!");
-        return;
-    }
     if (confirm("Are you sure you want to delete all the tasks?")) {
-        location.href = "../backend/deleteall.php";
+        location.href = "backend/deleteall.php";
     }
 }
 

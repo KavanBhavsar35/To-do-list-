@@ -8,5 +8,5 @@ $result = $conn->query($query);
 if (!$result) {
     die("Query failed: " . mysqli_error($conn));
 }
-header('Location: ../index1.php');
+header('Location: ..');
 ?>

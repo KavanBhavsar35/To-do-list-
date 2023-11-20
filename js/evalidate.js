@@ -12,22 +12,16 @@ submitBtn.addEventListener("click", async (e) => {
         if (result[key] !== "" && result[key] !== " ") {
             if (result.message == "Validation error") {
                 resultCont.innerHTML = "";
-                // console.log("invalid");
-                // return;
                 alert("Please enter a valid email!");
                 return;
             }
             else if (result.smtp_check == false || result.state == "undeliverable") {
                 resultCont.innerHTML = "";
-                // console.log("invalid");
-                // return;
                 alert("Please enter a valid email!");
                 return;
             }
             else {
                 resultCont.innerHTML = "";
-                // console.log("valid");
-                // return;
                 document.getElementById("user_Name").value = username;
                 document.getElementById("user_Email").value = email;
                 document.getElementById("user_Password").value = password;

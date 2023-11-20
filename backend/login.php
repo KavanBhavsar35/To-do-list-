@@ -13,10 +13,10 @@ if ($_POST) {
         $user = $result->fetch_all()[0];
         $_SESSION['user'] = $user;
         $conn->close();
-        header('Location: ../to_do_list-kavan/index.php');
+        header('Location: ..');
     } else {
         $_SESSION['error_message'] = true;
-        header('Location: ../to_do_list-kavan/index.php');
+        header('Location: ..');
     }
     $conn->close();
 }
